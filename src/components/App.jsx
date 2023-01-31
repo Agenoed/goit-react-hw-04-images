@@ -16,20 +16,6 @@ export function App() {
     if (!searchData) {
       return;
     }
-    fetchData();
-  }, [currentPage, searchData]);
-
-  const onChangeQuery = query => {
-    if (query !== searchData) {
-      setSearchData(query);
-      setCurrentPage(1);
-      setData([]);
-      setError(null);
-      setTotal(0);
-    }
-  };
-
-  const fetchData = () => {
     setIsLoading(true);
     fetch(
       `https://pixabay.com/api/?q=${searchData}&page=${currentPage}&key=31882217-972b08f02187a04a9df548d0a&image_type=photo&orientation=horizontal&per_page=12`
@@ -48,12 +34,24 @@ export function App() {
         setTotal(data.totalHits);
       })
       .finally(() => setIsLoading(false));
+  }, [currentPage, searchData]);
+
+  const onChangeQuery = query => {
+    if (query !== searchData) {
+      setSearchData(query);
+      setCurrentPage(1);
+      setData([]);
+      setError(null);
+      setTotal(0);
+    }
   };
 
   const loadMore = () => {
     setCurrentPage(prevCurrentPage => prevCurrentPage + 1);
   };
+
   const shouldRenderLoadMoreButton = total > 12 && !isLoading;
+
   return (
     <div className={css.App}>
       {error && <h1>Error!</h1>}
