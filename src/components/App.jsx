@@ -50,7 +50,8 @@ export function App() {
     setCurrentPage(prevCurrentPage => prevCurrentPage + 1);
   };
 
-  const shouldRenderLoadMoreButton = total > 12 && !isLoading;
+  const shouldRenderLoadMoreButton =
+    data.length < total && !isLoading && data.length !== 0;
 
   return (
     <div className={css.App}>

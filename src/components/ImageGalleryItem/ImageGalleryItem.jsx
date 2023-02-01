@@ -9,28 +9,26 @@ export function ImageGalleryItem({ image }) {
     setShowModal(prevShowModal => !prevShowModal);
   };
 
-return (
-  <>
-    <img
-      src={image.webformatURL}
-      alt={image.tags}
-      className={css.ImageGalleryItemImage}
-      onClick={toggleModal}
-    />
-    {showModal && (
-      <Modal onClose={toggleModal}>
-        <img src={image.largeImageURL} alt={image.tags} />
-      </Modal>
-    )}
-  </>
-);
+  return (
+    <>
+      <img
+        src={image.webformatURL}
+        alt={image.tags}
+        className={css.ImageGalleryItemImage}
+        onClick={toggleModal}
+      />
+      {showModal && (
+        <Modal onClose={toggleModal}>
+          <img src={image.largeImageURL} alt={image.tags} />
+        </Modal>
+      )}
+    </>
+  );
 }
 ImageGalleryItem.propTypes = {
-  image: PropTypes.objectOf(
-    PropTypes.shape({
-      webformatURL: PropTypes.string.isRequired,
-      largeImageURL: PropTypes.string.isRequired,
-      tags: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  image: PropTypes.shape({
+    webformatURL: PropTypes.string.isRequired,
+    largeImageURL: PropTypes.string.isRequired,
+    tags: PropTypes.string.isRequired,
+  }),
 };
