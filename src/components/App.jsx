@@ -26,13 +26,13 @@ export function App() {
         }
         return Promise.reject(new Error(`No picture with name ${searchData}`));
       })
-      .catch(error => setError(error))
       .then(data => {
         setData(prevData => {
           return [...prevData, ...data.hits];
         });
         setTotal(data.totalHits);
       })
+      .catch(error => setError(error))
       .finally(() => setIsLoading(false));
   }, [currentPage, searchData]);
 
